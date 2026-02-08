@@ -16,7 +16,7 @@ void displayMainMenu() {
   lcd.setCursor(0, 1);
   lcd.print("1) Add Medicine");
   lcd.setCursor(0, 2);
-  lcd.print("2) New Order");
+  lcd.print("2) Dispense Medicine");
   lcd.setCursor(0, 3);
   lcd.print("3) View Stock");
   
@@ -27,29 +27,63 @@ void displayMainMenu() {
   needRefresh = false;
 }
 
+// void displayAddMedicine() {
+//   if (!needRefresh && currentState == STATE_ADD_MEDICINE) return;
+  
+//   lcd.clear();
+//   lcd.setCursor(0, 0);
+//   lcd.write(byte(1));
+//   lcd.write(byte(1));
+//   lcd.print("  ADD MEDICINE  ");
+//   lcd.setCursor(18, 0);
+//   lcd.write(byte(0));
+//   lcd.write(byte(0));
+
+//   lcd.setCursor(0, 1);
+//   lcd.print("Scan/Enter barcode:");
+//   lcd.setCursor(0, 2);
+//   if (inputBuffer.length() > 0) {
+//     lcd.print(inputBuffer);
+//   } else {
+//     lcd.print("_");
+//   }
+//   lcd.setCursor(0, 3);
+//   lcd.print("*=OK       #=Back");  
+  
+//   currentState = STATE_ADD_MEDICINE;
+//   needRefresh = false;
+// }
+
 void displayAddMedicine() {
   if (!needRefresh && currentState == STATE_ADD_MEDICINE) return;
-  
+
+  int totalPages = (medicineCount + 1) / 2;
+
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.write(byte(1));
-  lcd.write(byte(1));
-  lcd.print("  ADD MEDICINE  ");
-  lcd.setCursor(18, 0);
-  lcd.write(byte(0));
-  lcd.write(byte(0));
+  lcd.print(" ADD MEDICINE ");
+  lcd.print(currentPage + 1);
+  lcd.print("/");
+  lcd.print(totalPages);
 
-  lcd.setCursor(0, 1);
-  lcd.print("Scan/Enter barcode:");
-  lcd.setCursor(0, 2);
-  if (inputBuffer.length() > 0) {
-    lcd.print(inputBuffer);
-  } else {
-    lcd.print("_");
+  for (int i = 0; i < 2; i++) {
+    int idx = (currentPage * 2) + i;
+    lcd.setCursor(0, i + 1);
+
+    if (idx < medicineCount) {
+      lcd.print(i + 1);
+      lcd.print(") ");
+      lcd.print(inventory[idx].name);
+    } else {
+      lcd.print("                    ");
+    }
   }
+
   lcd.setCursor(0, 3);
-  lcd.print("*=OK       #=Back");  
-  
+  if (currentPage < totalPages - 1) lcd.print("*=Next ");
+  if (currentPage > 0) lcd.print("0=Prev ");
+  lcd.print("#=Back");
+
   currentState = STATE_ADD_MEDICINE;
   needRefresh = false;
 }
@@ -224,4 +258,12 @@ void displayStockMenu() {
   
   currentState = STATE_STOCK;
   needRefresh = false;
+}
+
+void logMessage(const char* msg) {
+  Serial.println(msg);
+
+  lcd.clear();
+  lcd.setCursor(0, 1);
+  lcd.print(msg);
 }

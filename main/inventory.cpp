@@ -4,12 +4,12 @@ Medicine inventory[MAX_MEDICINES];
 int medicineCount = 0;
 
 void initializeSampleData() {
-  inventory[0] = {"123456789012", "PANADOL", 25, 2.50};
-  inventory[1] = {"234567890123", "BRUFEN", 15, 3.75};
-  inventory[2] = {"345678901234", "AUGMENTIN", 8, 15.00};
-  inventory[3] = {"456789012345", "ASPIRIN", 30, 1.25};
-  inventory[4] = {"567890123456", "PARACETAMOL", 20, 2.00};
-  inventory[5] = {"678901234567", "IBUPROFEN", 12, 4.50};
+  inventory[0] = {"1", "Siafil", 2, 2.50, 2, "A1", 2};
+  inventory[1] = {"2", "Lamirase", 2, 3.75, 3, "B1", 0};
+  inventory[2] = {"3", "Vermmazol", 2, 15.00, 2, "A2", 0};
+  inventory[3] = {"4", "Lorias", 2, 1.25, 3, "B2", 0};
+  inventory[4] = {"5", "Ultrafen Lc", 2, 2.00, 2, "A3", 0};
+  inventory[5] = {"6", "Clovix 75", 3, 4.50, 3, "B3", 0};
   medicineCount = 6;
 }
 

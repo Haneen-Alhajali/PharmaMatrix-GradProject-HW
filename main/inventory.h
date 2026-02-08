@@ -10,6 +10,9 @@ struct Medicine {
   String name;
   int quantity;
   float price;
+  int column;
+  String shelfName;
+  int stock;
 };
 
 // Global variables

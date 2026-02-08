@@ -31,4 +31,6 @@ void displayOrderMenu();
 void displayOrderQuantity();
 void displayStockMenu();
 
+void logMessage(const char* msg);
+
 #endif
